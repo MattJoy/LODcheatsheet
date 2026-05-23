@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liberty or Death — Field Cheat Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f1e3c1;
+    --parchment-deep:#e6d3a3;
+    --parchment-shadow:#c9b282;
+    --ink:#2b1c0e;
+    --ink-faded:#5b4628;
+    --rule:#7a5a32;
+    --british-red:#8a1a1a;
+    --british-red-dark:#5e0d0d;
+    --patriot-blue:#1a3a6e;
+    --patriot-blue-dark:#0f2547;
+    --indian-tan:#9c6a2e;
+    --indian-tan-dark:#6b4519;
+    --french-white:#f4ead2;
+    --french-accent:#1f3a8a;
+    --gold:#b08328;
+    --crimson-seal:#7a1414;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html,body{
+    background:
+      radial-gradient(ellipse at 20% 10%, #d8c293 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 80%, #c9ab73 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 50%, #ebd6a8 0%, #d4ba80 100%);
+    background-attachment:fixed;
+    color:var(--ink);
+    font-family:'Cormorant Garamond', 'Georgia', serif;
+    font-size:18px;
+    line-height:1.6;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+
+  /* Paper texture overlay */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(120,80,30,.025) 0 1px, transparent 1px 4px),
+      repeating-linear-gradient(-45deg, rgba(80,40,10,.025) 0 1px, transparent 1px 5px);
+    pointer-events:none;
+    z-index:1;
+  }
+  /* Grain */
+  body::after{
+    content:"";
+    position:fixed;inset:0;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.2  0 0 0 0 0.1  0 0 0 0 0  0 0 0 0.18 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity:.35;
+    mix-blend-mode:multiply;
+    pointer-events:none;
+    z-index:2;
+  }
+
+  .container{
+    position:relative;
+    z-index:3;
+    max-width:1200px;
+    margin:0 auto;
+    padding:40px 40px 80px;
+  }
+
+  /* ===== TOP NAV ===== */
+  .topnav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 0 22px;
+    border-bottom:1px solid var(--rule);
+    margin-bottom:30px;
+    font-family:'IM Fell English SC', serif;
+    font-size:13px;
+    letter-spacing:.2em;
+  }
+  .topnav a{
+    color:var(--ink-faded);
+    text-decoration:none;
+    border-bottom:1px dotted transparent;
+    transition:.2s;
+  }
+  .topnav a:hover{color:var(--crimson-seal);border-bottom-color:var(--crimson-seal);}
+  .topnav .forward{
+    color:var(--crimson-seal);
+    font-weight:bold;
+  }
+  .topnav .forward::after{content:" →";}
+
+  /* ===== CITATIONS — pill style ===== */
+  .cite{
+    display:inline-block;
+    background:rgba(122,20,20,.08);
+    color:var(--crimson-seal);
+    font-family:'IM Fell English SC', serif;
+    font-size:.65rem;
+    letter-spacing:.06em;
+    padding:1px 7px;
+    border:1px solid rgba(122,20,20,.25);
+    border-radius:2px;
+    margin-left:5px;
+    vertical-align:2px;
+    white-space:nowrap;
+    font-weight:normal;
+  }
+  .cite::before{content:"§ ";opacity:.65;}
+
+  /* ===== HEADER ===== */
+  header.broadside{
+    text-align:center;
+    padding:40px 20px 50px;
+    border-bottom:3px double var(--rule);
+    margin-bottom:60px;
+    position:relative;
+  }
+  header.broadside::before, header.broadside::after{
+    content:"❦";
+    position:absolute;bottom:-14px;
+    background:var(--parchment);
+    padding:0 14px;
+    color:var(--rule);
+    font-size:20px;
+  }
+  header.broadside::before{left:50%;transform:translateX(-50%);}
+  header.broadside::after{display:none;}
+
+  .eyebrow{
+    font-family:'IM Fell English SC', serif;
+    font-size:14px;
+    letter-spacing:.35em;
+    color:var(--ink-faded);
+    margin-bottom:18px;
+  }
+  h1.title{
+    font-family:'IM Fell English SC', serif;
+    font-size:clamp(2.8rem, 6vw, 5.2rem);
+    line-height:.95;
+    font-weight:400;
+    color:var(--ink);
+    text-shadow:1px 1px 0 rgba(0,0,0,.08);
+    margin-bottom:8px;
+  }
+  h1.title .or{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:.55em;
+    display:block;
+    color:var(--crimson-seal);
+    margin:8px 0;
+    letter-spacing:.02em;
+  }
+  .subtitle{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:1.2rem;
+    color:var(--ink-faded);
+    max-width:680px;
+    margin:24px auto 0;
+  }
+  .dateline{
+    font-family:'IM Fell English SC', serif;
+    font-size:12px;
+    letter-spacing:.3em;
+    color:var(--ink-faded);
+    margin-top:30px;
+  }
+
+  /* ===== TOC ===== */
+  nav.toc{
+    background:rgba(255,250,235,.4);
+    border:1px solid var(--rule);
+    border-radius:2px;
+    padding:24px 32px;
+    margin-bottom:60px;
+    box-shadow:inset 0 0 30px rgba(120,80,30,.08);
+  }
+  nav.toc h2{
+    font-family:'IM Fell English SC', serif;
+    font-size:14px;
+    letter-spacing:.3em;
+    margin-bottom:16px;
+    color:var(--ink-faded);
+    text-align:center;
+  }
+  nav.toc ul{
+    list-style:none;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 28px;
+    justify-content:center;
+  }
+  nav.toc a{
+    color:var(--ink);
+    text-decoration:none;
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:1.05rem;
+    border-bottom:1px solid transparent;
+    transition:all .2s;
+  }
+  nav.toc a:hover{
+    color:var(--crimson-seal);
+    border-bottom-color:var(--crimson-seal);
+  }
+
+  /* ===== SECTIONS ===== */
+  section{
+    margin-bottom:72px;
+    scroll-margin-top:20px;
+  }
+
+  h2.section-title{
+    font-family:'IM Fell English SC', serif;
+    font-size:2.2rem;
+    font-weight:400;
+    text-align:center;
+    margin-bottom:36px;
+    position:relative;
+    padding:18px 0;
+  }
+  h2.section-title::before, h2.section-title::after{
+    content:"";
+    position:absolute;
+    left:50%;transform:translateX(-50%);
+    width:280px;height:1px;
+    background:linear-gradient(90deg, transparent, var(--rule), transparent);
+  }
+  h2.section-title::before{top:0;}
+  h2.section-title::after{bottom:0;}
+
+  h3.subhead{
+    font-family:'IM Fell English SC', serif;
+    font-size:1.3rem;
+    letter-spacing:.08em;
+    margin-bottom:14px;
+    color:var(--ink);
+  }
+
+  p{margin-bottom:14px;}
+  p.lead{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:1.18rem;
+    text-align:center;
+    max-width:780px;
+    margin:0 auto 40px;
+    color:var(--ink-faded);
+  }
+
+  /* ===== TURN SEQUENCE ===== */
+  .sequence{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:18px;
+    margin-top:30px;
+  }
+  .seq-card{
+    background:rgba(255,250,235,.5);
+    border:1px solid var(--rule);
+    padding:20px;
+    position:relative;
+    box-shadow:2px 2px 0 rgba(120,80,30,.15);
+  }
+  .seq-card .num{
+    font-family:'IM Fell English SC', serif;
+    font-size:42px;
+    color:var(--crimson-seal);
+    opacity:.45;
+    position:absolute;top:8px;right:14px;
+    line-height:1;
+  }
+  .seq-card h4{
+    font-family:'IM Fell English SC', serif;
+    font-size:1rem;
+    letter-spacing:.1em;
+    margin-bottom:8px;
+  }
+  .seq-card p{font-size:.95rem;margin:0;}
+
+  /* ===== FACTION CARDS ===== */
+  .factions{
+    display:grid;
+    gap:36px;
+  }
+  .faction{
+    background:rgba(255,250,235,.55);
+    border:2px solid var(--rule);
+    border-radius:2px;
+    padding:36px 40px;
+    position:relative;
+    box-shadow:4px 4px 0 rgba(120,80,30,.18), inset 0 0 60px rgba(120,80,30,.05);
+  }
+  .faction::before{
+    content:"";
+    position:absolute;top:-2px;left:-2px;right:-2px;
+    height:6px;
+  }
+  .faction.british::before{background:linear-gradient(90deg, var(--british-red-dark), var(--british-red), var(--british-red-dark));}
+  .faction.patriot::before{background:linear-gradient(90deg, var(--patriot-blue-dark), var(--patriot-blue), var(--patriot-blue-dark));}
+  .faction.indian::before{background:linear-gradient(90deg, var(--indian-tan-dark), var(--indian-tan), var(--indian-tan-dark));}
+  .faction.french::before{background:linear-gradient(90deg, var(--french-accent), var(--french-white), var(--french-accent));}
+
+  .faction-header{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    margin-bottom:8px;
+    padding-bottom:20px;
+    border-bottom:1px solid var(--rule);
+  }
+  .crest{
+    width:64px;height:64px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IM Fell English SC', serif;
+    font-size:24px;
+    color:#fff;
+    flex-shrink:0;
+    box-shadow:0 2px 8px rgba(0,0,0,.25), inset 0 -3px 6px rgba(0,0,0,.2);
+    border:2px solid rgba(255,255,255,.15);
+  }
+  .british .crest{background:radial-gradient(circle at 30% 30%, var(--british-red), var(--british-red-dark));}
+  .patriot .crest{background:radial-gradient(circle at 30% 30%, var(--patriot-blue), var(--patriot-blue-dark));}
+  .indian .crest{background:radial-gradient(circle at 30% 30%, var(--indian-tan), var(--indian-tan-dark));}
+  .french .crest{background:radial-gradient(circle at 30% 30%, #ffffff, #d4d4d4); color:var(--french-accent);}
+
+  .faction-name{
+    font-family:'IM Fell English SC', serif;
+    font-size:2rem;
+    line-height:1;
+  }
+  .faction-side{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:1rem;
+    color:var(--ink-faded);
+    margin-top:4px;
+  }
+
+  .british .faction-name{color:var(--british-red-dark);}
+  .patriot .faction-name{color:var(--patriot-blue-dark);}
+  .indian .faction-name{color:var(--indian-tan-dark);}
+  .french .faction-name{color:var(--french-accent);}
+
+  .faction-body{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+    padding-top:24px;
+  }
+  .faction-body > div{}
+
+  .block-label{
+    font-family:'IM Fell English SC', serif;
+    font-size:.85rem;
+    letter-spacing:.18em;
+    color:var(--ink-faded);
+    margin-bottom:10px;
+    padding-bottom:6px;
+    border-bottom:1px dotted var(--rule);
+  }
+
+  ul.ornate{
+    list-style:none;
+    padding-left:0;
+  }
+  ul.ornate li{
+    padding:6px 0 6px 22px;
+    position:relative;
+    line-height:1.5;
+    font-size:1rem;
+  }
+  ul.ornate li::before{
+    content:"❧";
+    position:absolute;left:0;top:6px;
+    color:var(--gold);
+    font-size:.85rem;
+  }
+  .british ul.ornate li::before{color:var(--british-red);}
+  .patriot ul.ornate li::before{color:var(--patriot-blue);}
+  .indian ul.ornate li::before{color:var(--indian-tan-dark);}
+  .french ul.ornate li::before{color:var(--french-accent);}
+
+  .term{
+    font-family:'IM Fell English', serif;
+    font-style:italic;
+    font-weight:700;
+    color:var(--ink);
+  }
+
+  .victory-block{
+    grid-column:1 / -1;
+    background:rgba(122,90,50,.08);
+    border-left:3px solid var(--crimson-seal);
+    padding:18px 22px;
+    margin-top:8px;
+  }
+  .victory-block .block-label{border-bottom:none;padding:0;margin-bottom:8px;color:var(--crimson-seal);}
+  .victory-block p{margin:0;font-family:'Playfair Display', serif;font-style:italic;}
+  .vc-num{
+    display:inline-block;
+    background:var(--crimson-seal);
+    color:var(--parchment);
+    width:22px;height:22px;
+    border-radius:50%;
+    text-align:center;
+    line-height:22px;
+    font-family:'IM Fell English SC', serif;
+    font-size:.85rem;
+    font-style:normal;
+    margin-right:6px;
+    vertical-align:1px;
+  }
+
+  /* ===== BATTLE TABLE ===== */
+  .battle-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    margin-top:30px;
+  }
+  .battle-card{
+    background:rgba(255,250,235,.5);
+    border:1px solid var(--rule);
+    padding:24px;
+  }
+  .battle-card h4{
+    font-family:'IM Fell English SC', serif;
+    font-size:1.05rem;
+    letter-spacing:.1em;
+    margin-bottom:14px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--rule);
+    color:var(--crimson-seal);
+  }
+  .mod-row{
+    display:flex;
+    justify-content:space-between;
+    padding:5px 0;
+    border-bottom:1px dotted rgba(122,90,50,.3);
+    font-size:.98rem;
+  }
+  .mod-row:last-child{border-bottom:none;}
+  .mod-row .val{
+    font-family:'IM Fell English SC', serif;
+    color:var(--crimson-seal);
+    font-weight:bold;
+  }
+  .mod-row .val.neg{color:var(--patriot-blue-dark);}
+
+  .losses{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:24px;
+  }
+  .loss-box{
+    background:rgba(255,250,235,.5);
+    border:1px solid var(--rule);
+    padding:16px;
+    text-align:center;
+  }
+  .loss-box .big{
+    font-family:'IM Fell English SC', serif;
+    font-size:1.8rem;
+    color:var(--crimson-seal);
+    line-height:1;
+    margin-bottom:4px;
+  }
+  .loss-box .small{font-size:.9rem;color:var(--ink-faded);}
+
+  /* ===== STRATEGY ===== */
+  .strategies{
+    display:grid;
+    gap:24px;
+  }
+  .strategy{
+    background:rgba(255,250,235,.5);
+    border:1px solid var(--rule);
+    padding:26px 32px;
+    position:relative;
+  }
+  .strategy h3{
+    font-family:'IM Fell English SC', serif;
+    font-size:1.3rem;
+    margin-bottom:6px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .strategy .badge{
+    width:14px;height:14px;
+    border-radius:50%;
+    display:inline-block;
+    box-shadow:inset 0 -2px 3px rgba(0,0,0,.3);
+  }
+  .strategy.british h3{color:var(--british-red-dark);} .strategy.british .badge{background:var(--british-red);}
+  .strategy.patriot h3{color:var(--patriot-blue-dark);} .strategy.patriot .badge{background:var(--patriot-blue);}
+  .strategy.indian h3{color:var(--indian-tan-dark);} .strategy.indian .badge{background:var(--indian-tan);}
+  .strategy.french h3{color:var(--french-accent);} .strategy.french .badge{background:#fff; border:1px solid var(--french-accent);}
+
+  .strategy .motto{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    color:var(--ink-faded);
+    margin-bottom:14px;
+    font-size:1.05rem;
+  }
+  .strategy ol{
+    padding-left:22px;
+    counter-reset:tactic;
+    list-style:none;
+  }
+  .strategy ol li{
+    counter-increment:tactic;
+    padding:6px 0 6px 6px;
+    position:relative;
+  }
+  .strategy ol li::before{
+    content:counter(tactic, upper-roman) ".";
+    position:absolute;
+    left:-22px;
+    font-family:'IM Fell English SC', serif;
+    color:var(--ink-faded);
+    font-size:.85rem;
+    top:8px;
+  }
+
+  /* ===== KEY CONCEPTS ===== */
+  .concepts{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:18px;
+    margin-top:30px;
+  }
+  .concept{
+    background:rgba(255,250,235,.45);
+    border-left:3px solid var(--rule);
+    padding:16px 20px;
+  }
+  .concept h4{
+    font-family:'IM Fell English SC', serif;
+    font-size:1rem;
+    letter-spacing:.05em;
+    margin-bottom:6px;
+    color:var(--crimson-seal);
+  }
+  .concept p{font-size:.95rem;margin:0;}
+
+  /* ===== FOOTER ===== */
+  footer{
+    text-align:center;
+    margin-top:80px;
+    padding-top:30px;
+    border-top:3px double var(--rule);
+    color:var(--ink-faded);
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:.95rem;
+  }
+  footer .seal{
+    display:inline-block;
+    width:60px;height:60px;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, #a02020, var(--crimson-seal));
+    color:var(--parchment);
+    font-family:'IM Fell English SC', serif;
+    line-height:60px;
+    margin-bottom:14px;
+    box-shadow:0 3px 6px rgba(0,0,0,.3), inset 0 -3px 6px rgba(0,0,0,.25);
+    font-size:.75rem;
+    letter-spacing:.1em;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:720px){
+    .container{padding:30px 18px;}
+    .faction{padding:24px 22px;}
+    .faction-body{grid-template-columns:1fr;gap:22px;}
+    .battle-grid{grid-template-columns:1fr;}
+    .faction-header{flex-direction:column;align-items:flex-start;gap:14px;}
+    h1.title{font-size:2.4rem;}
+    nav.toc ul{gap:6px 18px;}
+  }
+
+  @media print{
+    body{background:#fff;}
+    body::before, body::after{display:none;}
+    .faction, .seq-card, .battle-card, .strategy, .concept{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="topnav">
+    <span>Part I · The Cheat Sheet</span>
+    <a class="forward" href="deep_dive.html">Continue to the Deep Dive</a>
+  </div>
+
+  <header class="broadside">
+    <div class="eyebrow">— A Field Compendium for the Insurrection —</div>
+    <h1 class="title">Liberty
+      <span class="or">~ or ~</span>
+      Death</h1>
+    <p class="subtitle">A traveller's reference to the COIN-series wargame of the American Rebellion, MDCCLXXV–MDCCLXXXIII. Containing the substance of all four factions, the manner of battle, & sundry strategies of war.</p>
+    <div class="dateline">Compiled from the Living Rules · GMT Games</div>
+  </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ul>
+      <li><a href="#essentials">Essentials</a></li>
+      <li><a href="#sequence">Turn Sequence</a></li>
+      <li><a href="#british">The British</a></li>
+      <li><a href="#patriots">The Patriots</a></li>
+      <li><a href="#indians">The Indians</a></li>
+      <li><a href="#french">The French</a></li>
+      <li><a href="#battle">Battle</a></li>
+      <li><a href="#winter">Winter Quarters</a></li>
+      <li><a href="#strategy">Strategies</a></li>
+    </ul>
+  </nav>
+
+  <!-- ESSENTIALS -->
+  <section id="essentials">
+    <h2 class="section-title">~ The Essentials ~</h2>
+    <p class="lead">Four factions vie for the soul of British North America. The Royalists — British & Indians — fight to preserve the Crown's order. The Rebellion — Patriots & French — seek its overthrow. Same-side factions are friends but win separately.</p>
+
+    <div class="concepts">
+      <div class="concept">
+        <h4>Population & Alignment</h4>
+        <p>Every Province and City of Population ≥ 1 sits at one of five levels: Active Support, Passive Support, Neutral, Passive Opposition, Active Opposition. Active counts double for victory totals. <span class="cite">1.6.1–1.6.3</span></p>
+      </div>
+      <div class="concept">
+        <h4>Control</h4>
+        <p>The Rebellion controls a space when Patriot+French pieces outnumber Royalist pieces. The British control when Royalist pieces are more <em>and</em> at least one British piece is present. <span class="cite">1.7</span></p>
+      </div>
+      <div class="concept">
+        <h4>Resources</h4>
+        <p>Each faction holds 0–50 Resources, paid to execute Commands. Passing the card grants +1 (Patriots/Indians) or +2 (British/French). <span class="cite">1.8, 2.3.3</span></p>
+      </div>
+      <div class="concept">
+        <h4>Eligibility</h4>
+        <p>Factions move in the order shown atop each card. After acting on a card, you sit out the next. Pass to refill the purse and stay Eligible. <span class="cite">2.3.1–2.3.6</span></p>
+      </div>
+      <div class="concept">
+        <h4>Underground vs Active</h4>
+        <p>Militia and War Parties are placed Underground (hidden). They flip Active when battling, marching into a controlled space in force, or being rabble-roused. <span class="cite">1.4.3</span></p>
+      </div>
+      <div class="concept">
+        <h4>Casualties (CBC / CRC)</h4>
+        <p>Cumulative British Casualties and Cumulative Rebellion Casualties are tallied through the whole game on edge tracks. Both feed directly into victory checks. <span class="cite">1.6.4, 7.2</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TURN SEQUENCE -->
+  <section id="sequence">
+    <h2 class="section-title">~ The Sequence of Play ~</h2>
+    <p class="lead">Cards drive everything. One Event card is in play; the next is revealed atop the deck. Up to two factions act per card, in the order their flags appear.</p>
+
+    <div class="sequence">
+      <div class="seq-card"><span class="num">I</span><h4>1st Eligible</h4>
+        <p>Pass (+ Resources), execute the Event, or take a Command — with or without a Special Activity. <span class="cite">2.3.4</span></p></div>
+      <div class="seq-card"><span class="num">II</span><h4>2nd Eligible</h4>
+        <p>Options depend on what the 1st did: if Command only → Limited Command; if Command + SA → LimCom or Event; if Event → full Command with SA. <span class="cite">2.3.4–2.3.5</span></p></div>
+      <div class="seq-card"><span class="num">III</span><h4>Brilliant Stroke</h4>
+        <p>Each faction holds one (French: two, incl. Treaty of Alliance). Plays as a trump before anyone acts; cancels the current Event. <span class="cite">2.3.8–2.3.9</span></p></div>
+      <div class="seq-card"><span class="num">IV</span><h4>Winter Quarters</h4>
+        <p>When this card surfaces, swap it in. Check victory, supply, resources, support, redeploy, desertion, reset. <span class="cite">2.4, 6.0</span></p></div>
+    </div>
+  </section>
+
+  <!-- BRITISH -->
+  <section id="british">
+    <h2 class="section-title">~ Factional Breakdown ~</h2>
+
+    <div class="factions">
+
+      <article class="faction british">
+        <div class="faction-header">
+          <div class="crest">B</div>
+          <div>
+            <div class="faction-name">The British</div>
+            <div class="faction-side">Royalist Side · Red Regulars & Green Tories</div>
+          </div>
+        </div>
+        <div class="faction-body">
+          <div>
+            <div class="block-label">Commands</div>
+            <ul class="ornate">
+              <li><span class="term">Muster</span> — place Regulars in a City or adjacent Colony (1 R per space); place Tories near Regulars/Forts; build a Fort from 3 cubes; or Reward Loyalty to shift Support. <span class="cite">3.2.1</span></li>
+              <li><span class="term">Garrison</span> — 2 R total; move Regulars into Cities, then Activate one Militia per 3 cubes; displace Rebellion from one British-controlled City. Unavailable at FNI 3. <span class="cite">3.2.2</span></li>
+              <li><span class="term">March</span> — 1 R per destination; Regulars to adjacent spaces, or via Cities; Tories may accompany 1-for-1; Activates Militia where 3+ cubes end. <span class="cite">3.2.3</span></li>
+              <li><span class="term">Battle</span> — 1 R per space; engage Rebellion pieces. Indians fight beside you free of charge if War Parties are present. <span class="cite">3.2.4, 3.6.1</span></li>
+            </ul>
+          </div>
+          <div>
+            <div class="block-label">Special Activities</div>
+            <ul class="ornate">
+              <li><span class="term">Common Cause</span> — use War Parties as Tories in March or Battle spaces. They activate. <span class="cite">4.2.1</span></li>
+              <li><span class="term">Skirmish</span> — strike Rebellion with Regulars in one non-Battle space; trade 1 Regular for 2 enemy cubes/Militia. <span class="cite">4.2.2</span></li>
+              <li><span class="term">Naval Pressure</span> — pre-Treaty: +1d3 R. Post-Treaty: lower FNI by 1 (or +1d3 R if FNI is 0). <span class="cite">4.2.3</span></li>
+            </ul>
+            <div class="block-label" style="margin-top:18px;">Leaders</div>
+            <ul class="ornate">
+              <li><span class="term">Gage</span> — 1st Reward Loyalty in his space is free.</li>
+              <li><span class="term">Howe</span> — lower FNI 1 before any British SA.</li>
+              <li><span class="term">Clinton</span> — Skirmish removes 1 extra Militia in his space.</li>
+            </ul>
+            <p style="font-size:.85rem;color:var(--ink-faded);margin-top:6px;text-align:right;"><span class="cite">1.10</span></p>
+          </div>
+          <div class="victory-block">
+            <div class="block-label">Victory Conditions <span class="cite">7.2</span></div>
+            <p><span class="vc-num">I</span>Support exceeds Opposition by more than 10. <span class="vc-num">II</span>Cumulative Rebellion Casualties greater than Cumulative British Casualties.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="faction patriot" id="patriots">
+        <div class="faction-header">
+          <div class="crest">P</div>
+          <div>
+            <div class="faction-name">The Patriots</div>
+            <div class="faction-side">Rebellion Side · Blue Militia, Continentals, & Forts</div>
+          </div>
+        </div>
+        <div class="faction-body">
+          <div>
+            <div class="block-label">Commands</div>
+            <ul class="ornate">
+              <li><span class="term">Rally</span> — 1 R per space (no Active Support); place Militia, or build a Fort from 2 units. With a Fort present, place extra Militia or pull adjacent Militia in & flip Underground. <span class="cite">3.3.1</span></li>
+              <li><span class="term">March</span> — 1 R per destination; move Militia, Continentals (and French if French pays). Continentals near Patriot Forts can replace Militia. <span class="cite">3.3.2</span></li>
+              <li><span class="term">Battle</span> — 1 R per space; French may join if they pay 1 R per space. <span class="cite">3.3.3</span></li>
+              <li><span class="term">Rabble-Rousing</span> — 1 R per space with Rebellion Control & Patriot pieces (or 1+ Underground Militia); place a Propaganda marker & shift one level toward Active Opposition. <span class="cite">3.3.4</span></li>
+            </ul>
+          </div>
+          <div>
+            <div class="block-label">Special Activities</div>
+            <ul class="ornate">
+              <li><span class="term">Persuasion</span> — in up to 3 Rebellion-controlled Colonies/Cities, activate 1 Underground Militia and gain 1 R each. Place Propaganda. <span class="cite">4.3.1</span></li>
+              <li><span class="term">Partisans</span> — in one space with Underground Militia & Royalist pieces (not a Battle space); activate Militia to remove enemy units. <span class="cite">4.3.2</span></li>
+              <li><span class="term">Skirmish</span> — Continentals strike British in one non-Battle space. <span class="cite">4.3.3</span></li>
+            </ul>
+            <div class="block-label" style="margin-top:18px;">Leader</div>
+            <ul class="ornate">
+              <li><span class="term">Washington</span> — doubles Rebellion Win-the-Day shift in his space; –1 to Defender Loss Level when Rebellion is defending there. <span class="cite">1.10</span></li>
+            </ul>
+          </div>
+          <div class="victory-block">
+            <div class="block-label">Victory Conditions <span class="cite">7.2</span></div>
+            <p><span class="vc-num">I</span>Opposition exceeds Support by more than 10. <span class="vc-num">II</span>Patriot Forts + 3 greater than Indian Villages.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="faction indian" id="indians">
+        <div class="faction-header">
+          <div class="crest">I</div>
+          <div>
+            <div class="faction-name">The Indians</div>
+            <div class="faction-side">Royalist Side · Tan War Parties & Villages</div>
+          </div>
+        </div>
+        <div class="faction-body">
+          <div>
+            <div class="block-label">Commands</div>
+            <ul class="ornate">
+              <li><span class="term">Gather</span> — 1 R per Province (free in first Indian Reserve). Not in Active Support/Opposition. Place a War Party, or build a Village from 2 War Parties. With a Village, place extra or pull adjacent War Parties in & flip Underground. <span class="cite">3.4.1</span></li>
+              <li><span class="term">March</span> — 1 R per Province destination (first Indian-Reserve origin is free). War Parties only; Provinces only. <span class="cite">3.4.2</span></li>
+              <li><span class="term">Scout</span> — 1 R (British also pays 1 R); move War Parties + at least 1 British Regular into adjacent Province; activate all moving War Parties & enemy Militia, then optionally Skirmish. <span class="cite">3.4.3</span></li>
+              <li><span class="term">Raid</span> — up to 3 Provinces with Opposition & Underground War Parties; activate one, place a Raid marker, shift Opposition 1 step toward Neutral. <span class="cite">3.4.4</span></li>
+            </ul>
+          </div>
+          <div>
+            <div class="block-label">Special Activities</div>
+            <ul class="ornate">
+              <li><span class="term">Trade</span> — one Province with Underground War Party & Village; British may transfer Resources, or take +1 R yourself & activate one War Party. <span class="cite">4.4.1</span></li>
+              <li><span class="term">War Path</span> — strike Rebellion with Underground War Parties anywhere; sacrifice War Parties for kills. <span class="cite">4.4.2</span></li>
+              <li><span class="term">Plunder</span> — accompanies Raid only; where War Parties exceed Rebellion pieces, steal Resources from Patriots equal to Population & lose 1 War Party. <span class="cite">4.4.3</span></li>
+            </ul>
+            <div class="block-label" style="margin-top:18px;">Leaders</div>
+            <ul class="ornate">
+              <li><span class="term">Brant</span> — Skirmish removes 1 extra Militia in space.</li>
+              <li><span class="term">Cornplanter</span> — War Path removes 1 extra Militia.</li>
+              <li><span class="term">Dragging Canoe</span> — Gather builds a Village from 1 War Party.</li>
+            </ul>
+            <p style="font-size:.85rem;color:var(--ink-faded);margin-top:6px;text-align:right;"><span class="cite">1.10</span></p>
+          </div>
+          <div class="victory-block">
+            <div class="block-label">Victory Conditions <span class="cite">7.2</span></div>
+            <p><span class="vc-num">I</span>Support exceeds Opposition by more than 10. <span class="vc-num">II</span>Villages − 3 greater than Patriot Forts.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="faction french" id="french">
+        <div class="faction-header">
+          <div class="crest">F</div>
+          <div>
+            <div class="faction-name">The French</div>
+            <div class="faction-side">Rebellion Side · White Regulars, Squadrons & Blockades</div>
+          </div>
+        </div>
+        <div class="faction-body">
+          <div>
+            <div class="block-label">Commands · before Treaty of Alliance</div>
+            <ul class="ornate">
+              <li><span class="term">French Agent Mobilization</span> — 1 R; in Quebec, New York, New Hampshire or Massachusetts (not Active Support), place 2 Militia or 1 Continental. <span class="cite">3.5.1</span></li>
+              <li><span class="term">Roderigue Hortalez et Cie</span> — pay any R; Patriots receive that + 1 Resource. <span class="cite">3.5.2</span></li>
+            </ul>
+            <div class="block-label" style="margin-top:14px;">Commands · after Treaty of Alliance <span class="cite">2.3.9</span></div>
+            <ul class="ornate">
+              <li><span class="term">Muster</span> — 2 R; place up to 4 Regulars in a Rebellion-controlled Colony/City or West Indies; optionally swap 2 Regulars for a Patriot Fort. <span class="cite">3.5.3</span></li>
+              <li><span class="term">March</span> — 1 R per destination with Patriot pieces (or anywhere if Continentals accompany); Continentals 1-for-1 with Patriot paying 1 R per destination. <span class="cite">3.5.4</span></li>
+              <li><span class="term">Battle</span> — 1 R per space; Patriots may join if they pay 1 R per space. <span class="cite">3.5.5</span></li>
+              <li><span class="term">Roderigue Hortalez et Cie</span> — still available, as above.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="block-label">Special Activities</div>
+            <ul class="ornate">
+              <li><span class="term">Préparer la Guerre</span> — move 1 Squadron to West Indies, or 3 Regulars from Unavailable to Available, or +2 R. <span class="cite">4.5.1</span></li>
+              <li><span class="term">Skirmish (post-TOA)</span> — French Regulars strike British in one non-Battle/non-Muster space. <span class="cite">4.5.2</span></li>
+              <li><span class="term">Naval Pressure (post-TOA)</span> — raise FNI by 1; place a Blockade on any City. <span class="cite">4.5.3</span></li>
+            </ul>
+            <div class="block-label" style="margin-top:18px;">Leaders</div>
+            <ul class="ornate">
+              <li><span class="term">Rochambeau</span> — French March/Battle joins a Patriot Command free.</li>
+              <li><span class="term">Lauzun</span> — +1 to Defender Loss Level when French attacking in his space.</li>
+            </ul>
+            <p style="font-size:.85rem;color:var(--ink-faded);margin-top:6px;text-align:right;"><span class="cite">1.10</span></p>
+          </div>
+          <div class="victory-block">
+            <div class="block-label">Victory Conditions <span class="cite">7.2</span></div>
+            <p><span class="vc-num">I</span>Opposition exceeds Support by more than 10. <span class="vc-num">II</span>Cumulative British Casualties greater than Cumulative Rebellion Casualties. <em>Treaty of Alliance must have been played.</em></p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- BATTLE -->
+  <section id="battle">
+    <h2 class="section-title">~ Battle Procedure ~</h2>
+    <p class="lead">Both sides calculate Force Level; both roll dice with modifiers to set the enemy's Loss Level; both remove pieces. Then check Win-the-Day.</p>
+
+    <div class="battle-grid">
+      <div class="battle-card">
+        <h4>Force Level → Dice <span class="cite">3.6.3–3.6.4</span></h4>
+        <div class="mod-row"><span>Each cube (Regular, Continental, Tory, French Reg)</span><span class="val">+1</span></div>
+        <div class="mod-row"><span>Active Militia / War Party</span><span class="val">+½</span></div>
+        <div class="mod-row"><span>Fort (defender only)</span><span class="val">+1</span></div>
+        <div class="mod-row"><span>Tories included only up to # of Regulars</span><span class="val">cap</span></div>
+        <div class="mod-row"><span>Roll dice</span><span class="val">FL ÷ 3 ↓, max 3 D3</span></div>
+        <div class="mod-row"><span>If Force Level ≤ 2</span><span class="val">no dice; treat as 0</span></div>
+      </div>
+      <div class="battle-card">
+        <h4>Defender Loss Level Modifiers <span class="cite">3.6.5</span></h4>
+        <div class="mod-row"><span>Half+ attacking cubes are Regulars</span><span class="val">+1</span></div>
+        <div class="mod-row"><span>1+ attacking piece Underground</span><span class="val">+1</span></div>
+        <div class="mod-row"><span>1+ attacking Leader present</span><span class="val">+1</span></div>
+        <div class="mod-row"><span>French attacking with Lauzun</span><span class="val">+1</span></div>
+        <div class="mod-row"><span>Per defending Fort</span><span class="val neg">−1</span></div>
+        <div class="mod-row"><span>British attacking Blockaded City</span><span class="val neg">−1</span></div>
+        <div class="mod-row"><span>British attacking W. Indies w/ Squadron</span><span class="val neg">−1</span></div>
+        <div class="mod-row"><span>Indians defending in Indian Reserve</span><span class="val neg">−1</span></div>
+        <div class="mod-row"><span>Patriots/French defending with Washington</span><span class="val neg">−1</span></div>
+      </div>
+      <div class="battle-card">
+        <h4>Attacker Loss Level Modifiers <span class="cite">3.6.6</span></h4>
+        <div class="mod-row"><span>Half+ defending cubes are Regulars</span><span class="val">+1</span></div>
+        <div class="mod-row"><span>1+ defending piece Underground</span><span class="val">+1</span></div>
+        <div class="mod-row"><span>1+ defending Leader present</span><span class="val">+1</span></div>
+        <div class="mod-row"><span>Per defending Fort</span><span class="val">+1</span></div>
+        <div class="mod-row"><span>British defending Blockaded City</span><span class="val neg">−1</span></div>
+        <div class="mod-row"><span>British defending W. Indies w/ Squadron</span><span class="val neg">−1</span></div>
+      </div>
+      <div class="battle-card">
+        <h4>Losses & Win-the-Day <span class="cite">3.6.7–3.6.8</span></h4>
+        <div class="mod-row"><span>Regular / Continental / Fort</span><span class="val">= 2 losses</span></div>
+        <div class="mod-row"><span>Tory / Militia / War Party / Village</span><span class="val">= 1 loss</span></div>
+        <div class="mod-row"><span>Underground Militia/WP ignored</span><span class="val">—</span></div>
+        <div class="mod-row"><span>Win-the-Day: shift Support/Opp</span><span class="val">loser pieces ÷ 2, max 3</span></div>
+        <div class="mod-row"><span>Washington wins: max</span><span class="val">6 levels</span></div>
+        <div class="mod-row"><span>Rebellion wins: free Rally + Blockade move</span><span class="val">bonus</span></div>
+      </div>
+    </div>
+
+    <div class="losses">
+      <div class="loss-box"><div class="big">Royalist</div><div class="small">Remove alternately: Regulars → Tories → Active War Parties → (if defending) Villages → Forts</div></div>
+      <div class="loss-box"><div class="big">Rebellion</div><div class="small">Remove alternately: French Regulars → Continentals → Active Militia → (if defending) Forts</div></div>
+    </div>
+  </section>
+
+  <!-- WINTER -->
+  <section id="winter">
+    <h2 class="section-title">~ Winter Quarters Round ~</h2>
+    <p class="lead">When the Winter Quarters card appears, set it as the current card and resolve the following phases in order.</p>
+
+    <div class="sequence">
+      <div class="seq-card"><span class="num">1</span><h4>Victory Check <span class="cite">6.1</span></h4><p>If any faction meets both its victory conditions positively, the game ends.</p></div>
+      <div class="seq-card"><span class="num">2</span><h4>Supply <span class="cite">6.2</span></h4><p>Out-of-supply units pay 1 R, retreat, or are removed. French must Battle British in West Indies.</p></div>
+      <div class="seq-card"><span class="num">3</span><h4>Resources <span class="cite">6.3</span></h4><p>British: Forts + non-Blockaded controlled City Pop. Patriots: Forts + ½ Rebellion-controlled spaces. Indians: ½ Villages. French (post-TOA): FNI + non-Br-controlled City Pop.</p></div>
+      <div class="seq-card"><span class="num">4</span><h4>Support <span class="cite">6.4</span></h4><p>British Reward Loyalty (needs Regular + Tory + Control). Patriots Committees of Correspondence (needs Rebellion Control + Patriot piece). Max 2 shifts per space.</p></div>
+      <div class="seq-card"><span class="num">5</span><h4>Redeploy <span class="cite">6.5</span></h4><p>Leader change (Gage→Howe→Clinton; Rochambeau→Lauzun; Brant→Cornplanter→Dragging Canoe). British Release Date arrivals. FNI drops 1.</p></div>
+      <div class="seq-card"><span class="num">6</span><h4>Desertion <span class="cite">6.6</span></h4><p>Remove 1 in 5 Militia, Continentals, and Tories. Enemies choose first.</p></div>
+      <div class="seq-card"><span class="num">7</span><h4>Reset <span class="cite">6.7</span></h4><p>Clear Raid & Propaganda markers. All factions Eligible. Casualties → Available. Flip Militia/WPs Underground.</p></div>
+      <div class="seq-card"><span class="num">★</span><h4>Final Winter <span class="cite">2.4.1, 7.3</span></h4><p>Final card: stop at Support Phase. Combine both victory conditions into a single margin; highest margin wins. French need TOA played.</p></div>
+    </div>
+  </section>
+
+  <!-- STRATEGIES -->
+  <section id="strategy">
+    <h2 class="section-title">~ Suggested Strategies ~</h2>
+    <p class="lead">Each faction has a different lever to pull. These are starting templates — your opponents and the card flow will twist them.</p>
+
+    <div class="strategies">
+
+      <div class="strategy british">
+        <h3><span class="badge"></span>The British — "Hold the Cities, Reward the Loyal"</h3>
+        <div class="motto">Your engine is City Population. Lose it and your treasury empties.</div>
+        <ol>
+          <li><strong>Garrison every coastal City early.</strong> British Resources scale directly with non-Blockaded City Pop in Winter Quarters. Aim for New York City, Philadelphia, Boston, Charles Town, Savannah.</li>
+          <li><strong>Build Tories aggressively in adjacent Colonies.</strong> Tories are cheap, count as cubes in Battle, and are the only thing Skirmish can't easily wipe out. Get them where Active Opposition isn't yet locked.</li>
+          <li><strong>Reward Loyalty during Muster, not just in Winter.</strong> Mid-campaign Reward Loyalty has no shift cap and clears Propaganda/Raid markers.</li>
+          <li><strong>Let the Indians do dirty work.</strong> Pay for joint Scouts; their War Path & Raid reduce Opposition without spending your own Resources.</li>
+          <li><strong>Watch the French build-up.</strong> Once Available French Regulars + Squadrons + CBC nears 15, the Treaty drops. Use Naval Pressure to suppress FNI before then, and don't let CBC balloon needlessly.</li>
+          <li><strong>Don't chase Battle if Opposition is already crawling.</strong> Often a Garrison + Skirmish does more good than a roll-heavy fight that piles CBC onto your worst victory metric.</li>
+        </ol>
+      </div>
+
+      <div class="strategy patriot">
+        <h3><span class="badge"></span>The Patriots — "Rally, Rouse, Outlast"</h3>
+        <div class="motto">You don't have to hold ground — you only have to make it ungovernable.</div>
+        <ol>
+          <li><strong>Underground Militia is your shield.</strong> Don't activate unless you must. Rally builds Militia for cheap; pulling adjacent Militia into a Fort space refreshes them all to Underground.</li>
+          <li><strong>Build Forts in interior Colonies.</strong> They give you supply, double your Rally outputs, and feed your second victory condition (Forts + 3 > Villages).</li>
+          <li><strong>Rabble-Rouse population centers, not empty land.</strong> Each Propaganda marker also blocks the British from cheaply Rewarding Loyalty later.</li>
+          <li><strong>Use Persuasion as a Resource engine.</strong> Three controlled spaces = +3 R every time you fire it.</li>
+          <li><strong>Time Continentals with French arrival.</strong> Continentals are pricey to use defensively, but post-TOA, paired with French Regulars under Rochambeau, they become a hammer.</li>
+          <li><strong>Mind your Forts vs Villages math.</strong> If Indians out-build you on Villages, you can win on Opposition and still lose the second condition. Skirmish/Partisans against Indians when needed.</li>
+        </ol>
+      </div>
+
+      <div class="strategy indian">
+        <h3><span class="badge"></span>The Indians — "Many Villages, Few Forts"</h3>
+        <div class="motto">You are Royalist by alignment but adversarial to the Patriots specifically.</div>
+        <ol>
+          <li><strong>Build Villages early, especially in Indian Reserve.</strong> First Reserve Province is free to Gather. Villages are your victory condition and your Resource engine (½ Villages per Winter Quarters).</li>
+          <li><strong>Raid Patriot frontier Colonies relentlessly.</strong> Each Raid drops Opposition a level and locks the space with a marker. Three Provinces a turn for 3 R is one of the best deals in the game.</li>
+          <li><strong>Trade with the British when their treasury is fat.</strong> Trade can shift British R to you with no risk.</li>
+          <li><strong>Plunder during Raid for double impact.</strong> Removing Patriot R while shifting Opposition cripples Patriot Rallies.</li>
+          <li><strong>Demand British Scout assistance.</strong> Pairs your activation with a free British move; great for projecting into contested Colonies.</li>
+          <li><strong>You can also lose if the British win.</strong> Same side ≠ same victory. Don't over-invest in Cities (you can't enter them) — focus on Province count and Villages relative to Patriot Forts.</li>
+        </ol>
+      </div>
+
+      <div class="strategy french">
+        <h3><span class="badge"></span>The French — "Patience, then Thunder"</h3>
+        <div class="motto">Before the Treaty: invisible. After the Treaty: decisive.</div>
+        <ol>
+          <li><strong>Préparer la Guerre every chance you get.</strong> Build Available Regulars and Squadrons toward the 15-piece threshold (count includes CBC).</li>
+          <li><strong>Use Roderigue Hortalez et Cie to bankroll Patriots.</strong> Every R you spend gives them R+1. Strong Patriots are the precondition for your win.</li>
+          <li><strong>French Agent Mobilization in New England.</strong> Plant Militia in Quebec / New York / New Hampshire / Massachusetts before TOA to seed Rebellion footprint.</li>
+          <li><strong>Drop the Treaty of Alliance at maximum leverage.</strong> Once played, you can suddenly muster Regulars, place Blockades, and Skirmish. Time it for when Opposition is close to the 10+ margin.</li>
+          <li><strong>FNI for Resources <em>and</em> denial.</strong> Each Blockaded City zeroes British City income, blocks Muster/Garrison/March, and boosts your Resource intake.</li>
+          <li><strong>Watch the West Indies.</strong> You must Battle British there each Winter if both are present — keep Squadrons handy and don't let it become a CRC dump.</li>
+          <li><strong>Without TOA you cannot win.</strong> If the deck threatens to bury TOA, play it before Resources are perfectly set rather than miss the window.</li>
+        </ol>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="seal">★ ★</div>
+    <div>Cheat sheet drawn from the GMT Games <em>Liberty or Death</em> Living Rules, August 2016.</div>
+    <div style="margin-top:6px;">Citations marked § refer to the numbered rule sections.</div>
+    <div style="margin-top:24px;">
+      <a href="deep_dive.html" style="display:inline-block;padding:14px 32px;background:var(--crimson-seal);color:var(--parchment);text-decoration:none;font-family:'IM Fell English SC',serif;letter-spacing:.15em;font-size:1rem;border:2px solid var(--crimson-seal);box-shadow:3px 3px 0 rgba(0,0,0,.2);">⚜ Continue to the Deep Dive ⚜</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
